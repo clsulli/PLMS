@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="edu.siue.plms.plms_userlogin.RegisterActivity">
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="PLMS Log In" />
+
+    <EditText
+        android:id="@+id/studentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/eid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="EID" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Password" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+
+</LinearLayout>
