@@ -41,10 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
         mFirebaseInstance.getReference("app_title").setValue("Parking Lot Monitoring System");
 
-        //Create Sample Users
-        //createUser("johdoe", "John Doe", "johdoe@siue.edu", "abcdef");
-        //createUser("jandoe", "Jane Doe", "jandoe@siue.edu", "ghijkl");
-
         btnRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -65,7 +61,8 @@ public class RegisterActivity extends AppCompatActivity {
         //Locates users 'directory' in Firebase
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         //Creates Unique ID for User inside of 'users'
-        String userID = mDatabase.push().getKey();
+        String userID = eid;
+        mDatabase.setValue(eid);
         User user = new User(eid, name, email, password);
         //Creates user in database
         mDatabase.child(userID).setValue(user);
