@@ -1,6 +1,7 @@
 package edu.siue.plms.plms_userlogin;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,11 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
+
+    //TAG
+    public static final String TAG = "LOGGING";
 
     //GUI Elements
     private EditText inputEID, inputPassword;
@@ -23,10 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     //Firebase Variables
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
-
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference("users");
-    
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +66,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
+                verifyLogin(inputEID.getText().toString());
             }
-        });
+        });}
+
+        public void verifyLogin(String userName)
+        {
+            DatabaseReference ref = mFirebaseDatabase.child("users");
+            Query userQuery = ref.orderByChild("eid").equalTo(userName);
+
+            userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    Log.d(TAG, "Value is: " + user);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+                }
+            });
+        }
+
     }
 
-
-
-}
 
     //Logs User in to app, verifying from Firebase
 
