@@ -1,21 +1,21 @@
 package edu.siue.plms.plms_userlogin;
 
 import android.content.Intent;
-import android.nfc.Tag;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,25 +23,26 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LOGGING";
 
     //GUI Elements
-    private EditText inputEID, inputPassword;
+    private EditText inputEmail, inputPassword;
     private Button btnLogin, btnRegister;
 
     //Firebase Variables
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
-    private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.login);
 
         //Displays Toolbar Icon
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //Attach GUI Inputs to Variables
-        inputEID = (EditText) findViewById(R.id.loginEID);
+        inputEmail = (EditText) findViewById(R.id.loginEmail);
         inputPassword = (EditText) findViewById(R.id.loginPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnCreateUser);
@@ -51,46 +52,54 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseDatabase = mFirebaseInstance.getReference();
         mFirebaseInstance.getReference("app_title").setValue("Parking Lot Monitoring System");
 
-        btnRegister.setOnClickListener(new View.OnClickListener()
-        {
+        //Get Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                verifyLogin(inputEID.getText().toString());
-            }
-        });}
 
-        public void verifyLogin(String userName)
-        {
-            DatabaseReference ref = mFirebaseDatabase.child("users");
-            Query userQuery = ref.orderByChild("eid").equalTo(userName);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               String email = inputEmail.getText().toString();
+               final String password = inputPassword.getText().toString();
 
-            userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    Log.d(TAG, "Value is: " + user);
-                }
+               if (TextUtils.isEmpty(email))
+               {
+                   Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                   return;
+               }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e(TAG, "onCancelled", databaseError.toException());
-                }
-            });
+               if (TextUtils.isEmpty(password))
+               {
+                   Toast.makeText(getApplicationContext(), "Enter Password!", Toast.LENGTH_SHORT).show();
+                   return;
+               }
+
+               //Authenticate User
+               mAuth.signInWithEmailAndPassword(email, password)
+                       .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                           @Override
+                           public void onComplete(@NonNull Task<AuthResult> task) {
+                               if (!task.isSuccessful())
+                               {
+                                   Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_LONG).show();
+                               }
+                               else
+                               {
+                                   startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                   finish();
+                               }
+                           }
+                       });
+           }
+       });
+
         }
-
     }
-
-
-    //Logs User in to app, verifying from Firebase
 

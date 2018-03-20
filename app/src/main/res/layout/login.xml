@@ -26,7 +26,7 @@
         android:background="#ffffff"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password"
+        android:hint="Password"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,7 +40,7 @@
         android:background="#ffffff"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/email"
+        android:hint="@string/email"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,4 +1,16 @@
 <resources>
-    <string name="app_name">Parking Lot Monitor System</string>
-    <string name="app_title">PLMS Log In</string>
+    <string name="app_name">PLMS Log In</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="forgot">Forgot?</string>
+
+    <string-array name="permits">
+        <item>Brown</item>
+        <item>Red</item>
+        <item>Residential Yellow</item>
+        <item>Evening Commuter (Silver)</item>
+        <item>Evening Residential (Silver)</item>
+        <item>Carpool</item>
+    </string-array>
 </resources>
+

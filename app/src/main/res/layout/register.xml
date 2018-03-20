@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#cf222b"
     tools:context="edu.siue.plms.plms_userlogin.RegisterActivity">
 
     <TextView
@@ -13,23 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="PLMS Log In" />
-
-    <EditText
-        android:id="@+id/studentName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name" />
-
-    <EditText
-        android:id="@+id/eid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="EID" />
+        android:text="PLMS Log In"
+        android:textColor="#ffffff"/>
 
     <EditText
         android:id="@+id/email"
@@ -37,6 +23,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textColorHint="#ffffff"
         android:hint="Email" />
 
     <EditText
@@ -45,12 +32,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+        android:textColorHint="#ffffff"
         android:hint="Password" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:text="Register" />
 
 </LinearLayout>

@@ -31,15 +31,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.register);
 
         //Displays Toolbar Icon
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //Attach GUI Inputs to Variables
-        inputName = (EditText) findViewById(R.id.studentName);
-        inputEID = (EditText) findViewById(R.id.eid);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         btnRegister = (Button) findViewById(R.id.submitButton);
@@ -48,8 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
         mFirebaseInstance.getReference("app_title").setValue("Parking Lot Monitoring System");
+        mAuth = FirebaseAuth.getInstance();
 
-
+        //Creates Application User on Firebase when Register is Clicked.
         btnRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -91,18 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                         });
             }
         });
-    }
 
-    //Creates new User in Firebase
-//    public void createUser(String eid, String name, String email, String password)
-//    {
-////        //Locates users 'directory' in Firebase
-////        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
-////        //Creates Unique ID for User inside of 'users'
-////        String userID = eid;
-////        mDatabase.setValue(eid);
-////        User user = new User(eid, name, email, password);
-////        //Creates user in database
-////        mDatabase.child(userID).setValue(user)
-//    }
+
+    }
 }

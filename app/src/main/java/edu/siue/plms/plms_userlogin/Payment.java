@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,15 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class Payment extends AppCompatActivity {
 
     //TAG
     public static final String TAG = "LOGGING";
 
     //GUI Elements
-//    private EditText inputEmail, inputPassword;
-//    private Button btnLogin, btnRegister;
-    private ImageButton btnParking, btnBalance, btnPayment, btnHelp;
+    private EditText inputEmail, inputPassword;
 
     //Firebase Variables
     private DatabaseReference mFirebaseDatabase;
@@ -47,17 +44,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.payment);
 
         //Displays Toolbar Icon
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-
-        //Attach GUI elements to variables
-        btnParking = (ImageButton) findViewById(R.id.btnParking);
-        btnBalance = (ImageButton) findViewById(R.id.btnBalance);
-        btnPayment = (ImageButton) findViewById(R.id.btnPayment);
-        btnHelp = (ImageButton) findViewById(R.id.btnHelp);
 
         //Setup Firebase
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -70,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUid = user.getUid();
 
-        //Creates User Reference in Database
-        createUser(userUid, user.getEmail());
         //Read database User value
 //        mFirebaseDatabase.child("users").child(userUid).addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -86,45 +75,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        //Updates Value
-//        Map<String, Object> update = new HashMap<>();
-//        update.put("name", "Clint Sullivan");
-//        mFirebaseDatabase.child("users").child(userUid).updateChildren(update);
-
-        btnParking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Parking.class));
-            }
-        });
-
-        btnBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Balance.class));
-            }
-        });
-
-        btnPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Payment.class));
-            }
-        });
-
-        btnHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Help.class));
-            }
-        });
-
-    }
-
-    public void createUser(String userUid, String email)
-    {
-        User newUser = new User(email);
-        mFirebaseDatabase.child("users").child(userUid).setValue(newUser);
     }
 
 }
