@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +36,8 @@ public class Parking extends AppCompatActivity {
     public static final String TAG = "LOGGING";
 
     //GUI Elements
-//    private EditText inputEmail, inputPassword;
+    private TextView currentTotal, currentLot, currentRate,
+                     lotATotal, lotBTotal, lotCTotal;
 //    private Button btnLogin, btnRegister;
 //    private Button btnTest;
 
@@ -52,6 +56,14 @@ public class Parking extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
+        //Attach GUI elements to Variables
+        currentTotal = (TextView) findViewById(R.id.currentTotal);
+        currentLot = (TextView) findViewById(R.id.currentLot);
+        currentRate = (TextView) findViewById(R.id.currentRate);
+        lotATotal = (TextView) findViewById(R.id.lotATotal);
+        lotBTotal = (TextView) findViewById(R.id.lotBTotal);
+        lotCTotal = (TextView) findViewById(R.id.lotCTotal);
+
         //Setup Firebase
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference();
@@ -64,19 +76,40 @@ public class Parking extends AppCompatActivity {
         String userUid = user.getUid();
 
         //Read database User value
-//        mFirebaseDatabase.child("users").child(userUid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                User value = (User) dataSnapshot.getValue(User.class);
-//                Toast.makeText(MainActivity.this, value.eid, Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(MainActivity.this, "Read Error", Toast.LENGTH_LONG).show();
-//            }
-//        });
+        DatabaseReference ref = mFirebaseDatabase.child("users").child(userUid);
 
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User value = (User) dataSnapshot.getValue(User.class);
+                Toast.makeText(Parking.this, value.totalDue, Toast.LENGTH_LONG).show();
+                currentTotal.setText(value.totalDue);
+                currentLot.setText("Lot: " + value.lotID);
+                currentRate.setText("Rate: " + value.lotPrice + "/h");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(Parking.this, "Read Error", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ref = mFirebaseDatabase.child("lots");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Lots value1 = (Lots) dataSnapshot.getValue(Lots.class);
+                Toast.makeText(Parking.this, value1.Lot1, Toast.LENGTH_LONG).show();
+                lotATotal.setText(value1.Lot1);
+                lotBTotal.setText(value1.Lot2);
+                lotCTotal.setText(value1.Lot3);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(Parking.this, "Read Error", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
