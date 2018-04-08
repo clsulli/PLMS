@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,13 +34,12 @@ public class Balance extends AppCompatActivity {
     public static final String TAG = "LOGGING";
 
     //GUI Elements
-    private EditText inputEmail, inputPassword;
+    private TextView usrName, usrEmail, usrBalance, usrID, usrPermits;
 
     //Firebase Variables
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,23 +57,36 @@ public class Balance extends AppCompatActivity {
         //Get Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        //Setup GUI Elements
+        usrBalance = (TextView) findViewById(R.id.usrBalanceDB);
+        usrEmail = (TextView) findViewById(R.id.usrEmailDB);
+        usrID = (TextView) findViewById(R.id.usrIDDB);
+        usrName = (TextView) findViewById(R.id.usrNameDB);
+        usrPermits = (TextView) findViewById(R.id.usrPermitsDB);
+
         //Get Logged In Application User and get unique User Id
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUid = user.getUid();
 
         //Read database User value
-//        mFirebaseDatabase.child("users").child(userUid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                User value = (User) dataSnapshot.getValue(User.class);
-//                Toast.makeText(MainActivity.this, value.eid, Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(MainActivity.this, "Read Error", Toast.LENGTH_LONG).show();
-//            }
-//        });
+        mFirebaseDatabase.child("users").child(userUid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User value = (User) dataSnapshot.getValue(User.class);
+                Toast.makeText(Balance.this, value.eid, Toast.LENGTH_LONG).show();
+                usrBalance.setText(value.balance);
+                usrEmail.setText(value.email);
+                usrID.setText(value.eid);
+                usrName.setText(value.name);
+                usrPermits.setText(value.permits);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(Balance.this, "Read Error", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
