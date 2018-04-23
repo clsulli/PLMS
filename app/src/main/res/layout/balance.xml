@@ -4,122 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cf222b">
+    android:background="#cf222b"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/usrID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="90dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="ID:"
-        app:layout_constraintEnd_toStartOf="@+id/balID"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrName" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="57dp"
+        android:id="@+id/usrBalance"
+        android:layout_width="59dp"
         android:layout_height="21dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:text="Balance:                       "
-        app:layout_constraintEnd_toStartOf="@+id/balBalance"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Balance:"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrEmail" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/usrName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="66dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="Name:"
-        app:layout_constraintEnd_toStartOf="@+id/balName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/usrPermits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="Permit Issued:"
-        app:layout_constraintEnd_toStartOf="@+id/balPermit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrBalance" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/usrEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="Email:"
-        app:layout_constraintEnd_toStartOf="@+id/balEmail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrID" />
 
-    <EditText
-        android:id="@+id/balName"
-        android:layout_width="166dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginTop="112dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3671875" />
 
-    <EditText
-        android:id="@+id/balID"
-        android:layout_width="166dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balName" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15655577" />
 
-    <EditText
-        android:id="@+id/balEmail"
-        android:layout_width="166dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginTop="26dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balID" />
+    <TextView
+        android:id="@+id/usrNameDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
-    <EditText
-        android:id="@+id/balBalance"
-        android:layout_width="166dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balEmail" />
+    <TextView
+        android:id="@+id/usrIDDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrNameDB" />
 
-    <EditText
-        android:id="@+id/balPermit"
-        android:layout_width="166dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginTop="34dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balBalance" />
+    <TextView
+        android:id="@+id/usrEmailDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrIDDB" />
+
+    <TextView
+        android:id="@+id/usrBalanceDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrEmailDB" />
+
+    <TextView
+        android:id="@+id/usrPermitsDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/usrBalanceDB" />
+
 </android.support.constraint.ConstraintLayout>

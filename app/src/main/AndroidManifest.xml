@@ -18,6 +18,13 @@
         </activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Balance"></activity>
+        <activity android:name=".Help"></activity>
+        <activity android:name=".Parking"></activity>
+        <activity android:name=".Payment"></activity>
+        <activity android:name=".AddDetails"></activity>
+        <activity android:name=".QRProcessor"></activity>
+
     </application>
 
 </manifest>

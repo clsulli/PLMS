@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //GUI Elements
     private EditText inputEmail, inputPassword;
-    private Button btnLogin, btnRegister;
+    private Button btnLogin, btnRegister, btnQR;
 
     //Firebase Variables
     private DatabaseReference mFirebaseDatabase;
@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.loginPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnCreateUser);
+        btnQR = (Button) findViewById(R.id.qr);
 
         //Setup Firebase
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -54,6 +55,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        btnQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, QRProcessor.class));
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth mAuth;
 
+    //User value
+    private String addDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,21 +72,37 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUid = user.getUid();
 
-        //Creates User Reference in Database
-        createUser(userUid, user.getEmail());
-        //Read database User value
+
+        //Detect if user needs to fill out additional details
 //        mFirebaseDatabase.child("users").child(userUid).addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
 //                User value = (User) dataSnapshot.getValue(User.class);
-//                Toast.makeText(MainActivity.this, value.eid, Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, value.filledDetails, Toast.LENGTH_LONG).show();
+//                addDetails = value.filledDetails;
+//                Toast.makeText(MainActivity.this, "Read: " + addDetails, Toast.LENGTH_LONG).show();
+//                if (addDetails != "Yes")
+//                {
+//                    startActivity(new Intent(MainActivity.this, AddDetails.class));
+//                }
+//                else
+//                {
+//                    Toast.makeText(MainActivity.this, "Details: " + addDetails, Toast.LENGTH_LONG).show();
+//                }
 //            }
 //
 //            @Override
 //            public void onCancelled(DatabaseError databaseError) {
 //                Toast.makeText(MainActivity.this, "Read Error", Toast.LENGTH_LONG).show();
 //            }
+//
 //        });
+
+
+
+
+
+
 
         //Updates Value
 //        Map<String, Object> update = new HashMap<>();
